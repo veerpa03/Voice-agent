@@ -1,0 +1,57 @@
+{
+  "restaurant_name": "Burger Palace",
+  "menu": [
+    {
+      "name": "Classic Burger",
+      "description": "Beef patty with lettuce, tomato, onion",
+      "price": 8.99,
+      "category": "Burgers",
+      "available": true,
+      "customizations": [
+        {
+          "name": "Spice level",
+          "options": ["mild", "medium", "hot"],
+          "price_delta": 0
+        },
+        {
+          "name": "Onion",
+          "options": ["regular", "grilled", "none"],
+          "price_delta": 0
+        },
+        {
+          "name": "Patty",
+          "options": ["single", "double"],
+          "price_delta": 2.00
+        }
+      ]
+    },
+    {
+      "name": "Fries",
+      "description": "Crispy golden fries",
+      "price": 3.99,
+      "category": "Sides",
+      "available": true,
+      "customizations": [
+        {
+          "name": "Size",
+          "options": ["regular", "large"],
+          "price_delta": 1.00
+        }
+      ]
+    },
+    {
+      "name": "Coke",
+      "description": "Chilled soft drink",
+      "price": 1.99,
+      "category": "Drinks",
+      "available": true,
+      "customizations": [
+        {
+          "name": "Size",
+          "options": ["small", "medium", "large"],
+          "price_delta": 0.50
+        }
+      ]
+    }
+  ]
+}

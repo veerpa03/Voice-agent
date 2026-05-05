@@ -17,7 +17,7 @@
             "provider": {
                 "type": "deepgram",
                 "model": "nova-3",
-                "keyterms": ["hello", "goodbye"]
+                "keyterms": ["order", "menu", "combo", "burger", "fries", "drink", "cancel", "total"]
             }
         },
         "think": {
@@ -26,7 +26,63 @@
                 "model": "gpt-4o-mini",
                 "temperature": 0.7
             },
-            "prompt": "You are a helpful AI assistant focused on customer service."
+            "prompt": "You are a friendly drive-thru assistant for Burger Palace. Keep responses short and conversational, like a real drive-thru worker. Never use markdown, bullet points, asterisks, or any formatting. Always speak in plain natural sentences as if talking out loud. When a customer orders, confirm the item and ask if they want anything else. When they are done, read back the full order and total before confirming. Use the available functions to get the menu, add items, and place orders.",
+            "functions": [
+                {
+                    "name": "get_menu",
+                    "description": "Get the full menu with items, prices and availability. Call this when a customer asks what is available or what is on the menu.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {},
+                        "required": []
+                    }
+                },
+                {
+                    "name": "add_item",
+                    "description": "Add an item to the current order. Call this when a customer orders something.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "item_name": {
+                                "type": "string",
+                                "description": "The name of the menu item"
+                            },
+                            "quantity": {
+                                "type": "integer",
+                                "description": "How many of this item"
+                            },
+                            "customizations": {
+                                "type": "object",
+                                "description": "Any customizations e.g. {\"Spice level\": \"hot\", \"Onion\": \"grilled\"}"
+                            }
+                        },
+                        "required": ["item_name", "quantity"]
+                    }
+                },
+                {
+                    "name": "get_order_summary",
+                    "description": "Get the current order with all items and total price. Call this when the customer wants to review their order or when confirming before placing.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {},
+                        "required": []
+                    }
+                },
+                {
+                    "name": "place_order",
+                    "description": "Place the final order and send it to the kitchen. Call this only after the customer has confirmed everything.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "phone_number": {
+                                "type": "string",
+                                "description": "Customer phone number from the call"
+                            }
+                        },
+                        "required": []
+                    }
+                }
+            ]
         },
         "speak": {
             "provider": {
@@ -34,6 +90,6 @@
                 "model": "aura-2-thalia-en"
             }
         },
-        "greeting": "Hello! How can I help you today?"
+        "greeting": "Welcome to Burger Palace! What can I get started for you today?"
     }
 }
